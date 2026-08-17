@@ -25,7 +25,7 @@ export default function StudentCard({ student, onDelete }) {
         </button>
       </div>
 
-      <div>
+      <div className={styles.details}>
         <div className={styles.row}>
           <span><strong>Year:</strong></span>
           <span>{student.yearLevel}</span>
