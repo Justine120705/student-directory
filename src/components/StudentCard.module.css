@@ -1,111 +1,96 @@
-:root {
-  --bg-card: #ffffff;
-  --border-color: #e2e8f0;
-  --text-primary: #0f172a;
-  --text-secondary: #64748b;
-  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
-  --shadow-hover: 0 12px 20px -8px rgba(15, 23, 42, 0.12);
-  
-  /* Status Colors */
-  --badge-bg: #ecfdf5;
-  --badge-text: #047857;
-  --badge-border: #a7f3d0;
-  --danger-border: #fca5a5;
-  --danger-bg: #fff5f5;
-  --danger-text: #e11d48;
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
 }
 
-.card {
-  width: 260px;
-  aspect-ratio: 1 / 1; /* Enforces a perfect 1:1 square ratio */
-  padding: 1.25rem;
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  box-shadow: var(--shadow-sm);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
-              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.2s ease;
-  position: relative;
-  overflow: hidden;
+.title {
+  text-align: center;
+  color: #333;
+}
 
-  /* Flexbox layout to distribute top, middle, and bottom sections evenly */
+.form {
+  background-color: #f8f9fa;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  border: 1px solid #e9ecef;
+}
+
+.form h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.formGrid input,
+.formGrid select,
+.searchInput {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.submitBtn {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.controls {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.searchInput {
+  width: 100%;
   box-sizing: border-box;
 }
 
-/* Hover elevation */
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-hover);
-  border-color: #cbd5e1;
-}
-
-.name {
-  margin: 0 0 0.15rem 0;
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: -0.015em;
-  color: var(--text-primary);
-}
-
-.course {
-  margin: 0;
-  font-size: 0.725rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-secondary);
-}
-
-.row {
+.filterButtons {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.25rem 0;
-  font-size: 0.8rem;
-  color: var(--text-primary);
+  gap: 8px;
 }
 
-.row:not(:last-of-type) {
-  border-bottom: 1px solid #f1f5f9;
+.filterBtn, .activeFilter {
+  padding: 8px 16px;
+  border: 1px solid #3498db;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: white;
+  color: #3498db;
+  font-weight: bold;
 }
 
-.badge {
-  display: inline-flex;
-  align-items: center;
-  align-self: flex-start;
-  padding: 0.2rem 0.55rem;
-  background-color: var(--badge-bg);
-  color: var(--badge-text);
-  border: 1px solid var(--badge-border);
-  font-size: 0.675rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  border-radius: 6px;
+.activeFilter {
+  background-color: #3498db;
+  color: white;
 }
 
-/* Probation State */
-.card.probation {
-  border-color: var(--danger-border);
-  background-color: var(--danger-bg);
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
 }
 
-.card.probation::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background-color: var(--danger-text);
-}
-
-.probationText {
-  color: var(--danger-text);
-  font-weight: 600;
+.noResults {
+  text-align: center;
+  color: #7f8c8d;
+  font-style: italic;
+  font-size: 1.1rem;
+  margin-top: 32px;
 }
