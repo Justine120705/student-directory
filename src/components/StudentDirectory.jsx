@@ -16,6 +16,11 @@ export default function StudentDirectory() {
     gwa: '',
   });
 
+  // Delete student handler
+  const handleDeleteStudent = (id) => {
+    setStudents((prev) => prev.filter((student) => student.id !== id));
+  };
+
   // Combined live search & category filter
   const filteredStudents = students.filter((student) => {
     const query = searchTerm.toLowerCase().trim();
@@ -33,7 +38,7 @@ export default function StudentDirectory() {
     return matchesSearch && matchesFilter;
   });
 
-  // Immutable addition (initialStudents is never mutated)
+  // Immutable addition
   const handleAddStudent = (e) => {
     e.preventDefault();
     if (!formData.name.trim() || !formData.course.trim() || !formData.gwa) return;
@@ -109,7 +114,7 @@ export default function StudentDirectory() {
         <button type="submit" className={styles.submitBtn}>Add Student</button>
       </form>
 
-      {/* Search Bar & Category Controls */}
+      {/* Desktop Search Bar & Filter Controls */}
       <div className={styles.controls}>
         <input
           type="text"
@@ -133,11 +138,15 @@ export default function StudentDirectory() {
         </div>
       </div>
 
-      {/* Single-Column Card Stack or Empty State */}
+      {/* Multi-Column Desktop Grid */}
       {filteredStudents.length > 0 ? (
         <div className={styles.grid}>
           {filteredStudents.map((student) => (
-            <StudentCard key={student.id} student={student} />
+            <StudentCard
+              key={student.id}
+              student={student}
+              onDelete={handleDeleteStudent}
+            />
           ))}
         </div>
       ) : (
