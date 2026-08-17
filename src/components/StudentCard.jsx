@@ -1,6 +1,6 @@
 import styles from './StudentCard.module.css';
 
-export default function StudentCard({ student }) {
+export default function StudentCard({ student, onDelete }) {
   const isDeansLister = student.gwa <= 1.75;
   const isOnProbation = student.status === 'On Probation';
 
@@ -10,9 +10,19 @@ export default function StudentCard({ student }) {
 
   return (
     <div className={cardClassName}>
-      <div>
-        <h3 className={styles.name}>{student.name}</h3>
-        <p className={styles.course}>{student.course}</p>
+      <div className={styles.cardHeader}>
+        <div>
+          <h3 className={styles.name}>{student.name}</h3>
+          <p className={styles.course}>{student.course}</p>
+        </div>
+        <button
+          type="button"
+          className={styles.deleteBtn}
+          onClick={() => onDelete(student.id)}
+          title="Delete Student"
+        >
+          ✕
+        </button>
       </div>
 
       <div>
