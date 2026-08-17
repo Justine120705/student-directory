@@ -16,11 +16,12 @@ export default function StudentDirectory() {
     gwa: '',
   });
 
-  // Combined live search + category filter
+  // Combined live search & category filter
   const filteredStudents = students.filter((student) => {
+    const query = searchTerm.toLowerCase().trim();
     const matchesSearch =
-      student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      student.course.toLowerCase().includes(searchTerm.toLowerCase());
+      student.name.toLowerCase().includes(query) ||
+      student.course.toLowerCase().includes(query);
 
     let matchesFilter = true;
     if (activeFilter === "Dean's Listers") {
@@ -35,12 +36,12 @@ export default function StudentDirectory() {
   // Immutable addition (initialStudents is never mutated)
   const handleAddStudent = (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.course || !formData.gwa) return;
+    if (!formData.name.trim() || !formData.course.trim() || !formData.gwa) return;
 
     const newStudent = {
       id: Date.now(),
-      name: formData.name,
-      course: formData.course,
+      name: formData.name.trim(),
+      course: formData.course.trim(),
       yearLevel: Number(formData.yearLevel),
       status: formData.status,
       gwa: parseFloat(formData.gwa),
@@ -108,7 +109,7 @@ export default function StudentDirectory() {
         <button type="submit" className={styles.submitBtn}>Add Student</button>
       </form>
 
-      {/* Search and Category Controls */}
+      {/* Search Bar & Category Controls */}
       <div className={styles.controls}>
         <input
           type="text"
@@ -132,7 +133,7 @@ export default function StudentDirectory() {
         </div>
       </div>
 
-      {/* Filtered Grid or Empty State */}
+      {/* Single-Column Card Stack or Empty State */}
       {filteredStudents.length > 0 ? (
         <div className={styles.grid}>
           {filteredStudents.map((student) => (
