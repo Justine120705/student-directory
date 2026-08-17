@@ -8,7 +8,6 @@ export default function StudentDirectory() {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeFilter, setActiveFilter] = useState('All');
 
-  // Controlled form state
   const [formData, setFormData] = useState({
     name: '',
     course: '',
@@ -17,7 +16,7 @@ export default function StudentDirectory() {
     gwa: '',
   });
 
-  // Combined search and filter calculation
+  // Combined live search + category filter
   const filteredStudents = students.filter((student) => {
     const matchesSearch =
       student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -33,13 +32,13 @@ export default function StudentDirectory() {
     return matchesSearch && matchesFilter;
   });
 
-  // Immutable state update for adding a new student
+  // Immutable addition (initialStudents is never mutated)
   const handleAddStudent = (e) => {
     e.preventDefault();
     if (!formData.name || !formData.course || !formData.gwa) return;
 
     const newStudent = {
-      id: Date.now(), // Safe unique ID
+      id: Date.now(),
       name: formData.name,
       course: formData.course,
       yearLevel: Number(formData.yearLevel),
@@ -49,7 +48,6 @@ export default function StudentDirectory() {
 
     setStudents((prev) => [...prev, newStudent]);
 
-    // Reset form inputs
     setFormData({
       name: '',
       course: '',
@@ -110,7 +108,7 @@ export default function StudentDirectory() {
         <button type="submit" className={styles.submitBtn}>Add Student</button>
       </form>
 
-      {/* Search and Category Filter Controls */}
+      {/* Search and Category Controls */}
       <div className={styles.controls}>
         <input
           type="text"
