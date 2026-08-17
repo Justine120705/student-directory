@@ -1,10 +1,8 @@
 import styles from './StudentCard.module.css';
 
 export default function StudentCard({ student }) {
-  const { name, course, yearLevel, status, gwa } = student;
-
-  const isOnProbation = status === 'On Probation';
-  const isDeansLister = gwa <= 1.75;
+  const isDeansLister = student.gwa <= 1.75;
+  const isOnProbation = student.status === 'On Probation';
 
   const cardClassName = isOnProbation
     ? `${styles.card} ${styles.probation}`
@@ -12,27 +10,31 @@ export default function StudentCard({ student }) {
 
   return (
     <div className={cardClassName}>
-      <h3 className={styles.name}>{name}</h3>
-      <p className={styles.course}>{course}</p>
-
-      <div className={styles.row}>
-        <span>Year Level</span>
-        <span>{yearLevel}</span>
+      <div>
+        <h3 className={styles.name}>{student.name}</h3>
+        <p className={styles.course}>{student.course}</p>
       </div>
 
-      <div className={styles.row}>
-        <span>Status</span>
-        <span className={isOnProbation ? styles.probationText : undefined}>
-          {isOnProbation ? 'On Probation' : status}
-        </span>
+      <div>
+        <div className={styles.row}>
+          <span><strong>Year:</strong></span>
+          <span>{student.yearLevel}</span>
+        </div>
+        <div className={styles.row}>
+          <span><strong>Status:</strong></span>
+          <span className={isOnProbation ? styles.probationText : ''}>
+            {student.status}
+          </span>
+        </div>
+        <div className={styles.row}>
+          <span><strong>GWA:</strong></span>
+          <span>{Number(student.gwa).toFixed(2)}</span>
+        </div>
       </div>
 
-      <div className={styles.row}>
-        <span>GWA</span>
-        <span>{gwa.toFixed(2)}</span>
-      </div>
-
-      {isDeansLister && <span className={styles.badge}>Dean's Lister</span>}
+      {isDeansLister && (
+        <span className={styles.badge}>Dean's Lister</span>
+      )}
     </div>
   );
 }
