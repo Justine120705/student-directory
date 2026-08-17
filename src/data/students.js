@@ -48,3 +48,6 @@ export const initialStudents = [
     gwa: 2.25,
   },
 ];
+
+// Export students as an alias to satisfy App.jsx
+export const students = initialStudents;
