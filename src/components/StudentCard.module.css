@@ -1,48 +1,63 @@
 :root {
   --bg-card: #ffffff;
-  --border-color: #e5e7eb;
-  --text-primary: #111827;
-  --text-secondary: #6b7280;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
-  --shadow-hover: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  --border-color: #e2e8f0;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+  --shadow-hover: 0 12px 20px -8px rgba(15, 23, 42, 0.12);
   
   /* Status Colors */
-  --badge-bg: #fef3c7;
-  --badge-text: #92400e;
+  --badge-bg: #ecfdf5;
+  --badge-text: #047857;
+  --badge-border: #a7f3d0;
   --danger-border: #fca5a5;
-  --danger-bg: #fef2f2;
-  --danger-text: #dc2626;
+  --danger-bg: #fff5f5;
+  --danger-text: #e11d48;
 }
 
 .card {
-  width: 280px;
-  padding: 1.5rem;
+  width: 260px;
+  aspect-ratio: 1 / 1; /* Enforces a perfect 1:1 square ratio */
+  padding: 1.25rem;
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: 16px;
   box-shadow: var(--shadow-sm);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s ease;
+  position: relative;
+  overflow: hidden;
+
+  /* Flexbox layout to distribute top, middle, and bottom sections evenly */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
 }
 
-/* Subtle elevation lift on hover */
+/* Hover elevation */
 .card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-hover);
+  border-color: #cbd5e1;
 }
 
 .name {
-  margin: 0 0 0.2rem 0;
-  font-size: 1.125rem;
+  margin: 0 0 0.15rem 0;
+  font-size: 1.05rem;
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
   color: var(--text-primary);
 }
 
 .course {
-  margin: 0 0 1rem 0;
-  font-size: 0.85rem;
-  font-weight: 500;
+  margin: 0;
+  font-size: 0.725rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   color: var(--text-secondary);
 }
 
@@ -50,34 +65,44 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.35rem 0;
-  font-size: 0.875rem;
+  padding: 0.25rem 0;
+  font-size: 0.8rem;
   color: var(--text-primary);
 }
 
-/* Optional border separator between rows */
 .row:not(:last-of-type) {
-  border-bottom: 1px dashed #f3f4f6;
+  border-bottom: 1px solid #f1f5f9;
 }
 
 .badge {
   display: inline-flex;
   align-items: center;
-  margin-top: 0.75rem;
-  padding: 0.25rem 0.75rem;
+  align-self: flex-start;
+  padding: 0.2rem 0.55rem;
   background-color: var(--badge-bg);
   color: var(--badge-text);
-  font-size: 0.75rem;
+  border: 1px solid var(--badge-border);
+  font-size: 0.675rem;
   font-weight: 600;
-  letter-spacing: 0.025em;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
-  border-radius: 9999px;
+  border-radius: 6px;
 }
 
 /* Probation State */
 .card.probation {
   border-color: var(--danger-border);
   background-color: var(--danger-bg);
+}
+
+.card.probation::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background-color: var(--danger-text);
 }
 
 .probationText {
